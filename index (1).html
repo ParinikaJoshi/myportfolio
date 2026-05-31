@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parinika Joshi · Clinical Data Scientist & Health Tech Innovator</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,600&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --ink: #0d1117;
+  --paper: #f5f0e8;
+  --paper2: #ede8dc;
+  --paper3: #e3ddd0;
+  --accent: #1a4a3a;
+  --accent2: #c8622a;
+  --accent3: #2a5a8a;
+  --muted: #7a7268;
+  --rule: #c8c0b0;
+  --white: #faf8f4;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 48px;
+  border-bottom: 1px solid var(--rule);
+  background: rgba(245, 240, 232, 0.92);
+  backdrop-filter: blur(12px);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 120px 48px 72px;
+  position: relative;
+  border-bottom: 1px solid var(--rule);
+  overflow: hidden;
+}
+.hero-bg-text {
+  position: absolute;
+  top: 50%;
+  right: -2%;
+  transform: translateY(-55%);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(14vw, 20vw, 26vw);
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(0,0,0,0.06);
+  line-height: 0.85;
+  user-select: none;
+  pointer-events: none;
+  letter-spacing: -0.04em;
+}
+.hero-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-tag::before {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 1px;
+  background: var(--accent2);
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.5rem, 8vw, 8rem);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  margin-bottom: 32px;
+  max-width: 900px;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent2);
+}
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 560px;
+  line-height: 1.7;
+  margin-bottom: 48px;
+  font-weight: 300;
+}
+.hero-sub strong { color: var(--ink); font-weight: 500; }
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 13px 28px;
+  border-radius: 2px;
+  text-decoration: none;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+.btn-outline {
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  padding: 13px 28px;
+  border-radius: 2px;
+  text-decoration: none;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.btn-outline:hover { background: var(--ink); color: var(--paper); }
+
+/* ── STATS STRIP ── */
+.stats-strip {
+  background: var(--ink);
+  color: var(--paper);
+  display: flex;
+  justify-content: space-around;
+  padding: 32px 48px;
+  border-bottom: 1px solid var(--rule);
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.stat-item { text-align: center; }
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--paper);
+  line-height: 1;
+}
+.stat-unit {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.45);
+  display: block;
+  margin-top: 4px;
+}
+
+/* ── TICKER ── */
+.ticker {
+  overflow: hidden;
+  background: var(--paper2);
+  border-bottom: 1px solid var(--rule);
+  padding: 10px 0;
+  white-space: nowrap;
+}
+.ticker-inner {
+  display: inline-flex;
+  gap: 0;
+  animation: scroll 28s linear infinite;
+}
+.ticker-inner span {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  padding: 0 20px;
+}
+.ticker-inner span.dot { color: var(--accent2); padding: 0 4px; }
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ── SECTION LAYOUT ── */
+section {
+  padding: 96px 48px;
+  border-bottom: 1px solid var(--rule);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+section:last-of-type { border-bottom: none; }
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 56px;
+}
+.section-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--accent2);
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.section-title em { font-style: italic; color: var(--accent2); }
+
+/* ── ABOUT ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.about-text p {
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+.about-text p:last-child { margin-bottom: 0; }
+.about-text strong { font-weight: 600; }
+.about-sidebar { display: flex; flex-direction: column; gap: 32px; }
+.sidebar-block h4 {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--rule);
+}
+.edu-item { margin-bottom: 14px; }
+.edu-item .degree {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.edu-item .school { font-size: 0.83rem; color: var(--muted); margin-top: 1px; }
+.edu-item .year {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--accent2);
+  margin-top: 2px;
+}
+.award-item {
+  font-size: 0.83rem;
+  color: var(--ink);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.award-item::before { content: '✦'; color: var(--accent2); font-size: 0.6rem; flex-shrink: 0; margin-top: 3px; }
+.award-item:last-child { border-bottom: none; }
+
+/* ── EXPERIENCE ── */
+.exp-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 40px;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.exp-item:last-child { border-bottom: none; }
+.exp-meta .date {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--accent2);
+  margin-bottom: 8px;
+}
+.exp-meta .org {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.exp-meta .dept { font-size: 0.78rem; color: var(--muted); margin-top: 3px; }
+.exp-content h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+.exp-content ul { list-style: none; margin-bottom: 14px; }
+.exp-content li {
+  font-size: 0.88rem;
+  color: #3a3530;
+  padding: 4px 0 4px 16px;
+  position: relative;
+  line-height: 1.6;
+}
+.exp-content li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--rule);
+  font-family: 'DM Mono', monospace;
+}
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  padding: 3px 9px;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  color: var(--muted);
+  background: var(--white);
+}
+
+/* ── PUBLICATIONS ── */
+.pub-list { display: flex; flex-direction: column; gap: 0; }
+.pub-item {
+  padding: 22px 0;
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.pub-item:last-child { border-bottom: none; }
+.pub-year {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  padding-top: 3px;
+}
+.pub-content .pub-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+.pub-content .pub-authors { font-size: 0.8rem; color: var(--muted); margin-bottom: 3px; }
+.pub-content .pub-journal { font-size: 0.78rem; color: #5a5248; font-style: italic; }
+.pub-status {
+  display: inline-block;
+  margin-left: 8px;
+  font-style: normal;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  padding: 2px 6px;
+  border-radius: 2px;
+  vertical-align: middle;
+}
+.pub-status.published { background: #e8f0e8; color: var(--accent); border: 1px solid #c0d8c0; }
+.pub-status.submitted { background: #f0e8e0; color: var(--accent2); border: 1px solid #d8c0b0; }
+.pub-status.review { background: #e8eef8; color: var(--accent3); border: 1px solid #b8cce0; }
+.pub-status.prep { background: var(--paper2); color: var(--muted); border: 1px solid var(--rule); }
+.pub-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--accent3);
+  text-decoration: none;
+  margin-left: 6px;
+}
+.pub-link:hover { text-decoration: underline; }
+
+/* ── SKILLS ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1px;
+  border: 1px solid var(--rule);
+  background: var(--rule);
+}
+.skill-block {
+  background: var(--white);
+  padding: 24px 26px;
+}
+.skill-block h4 {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  margin-bottom: 14px;
+}
+.skill-block .skill-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.skill-pill {
+  font-size: 0.8rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 4px 10px;
+  border-radius: 2px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ── PROJECTS ── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+}
+.project-card {
+  border: 1px solid var(--rule);
+  background: var(--white);
+  padding: 28px;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+}
+.project-domain {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  margin-bottom: 10px;
+}
+.project-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.project-card p {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  font-weight: 300;
+}
+
+/* ── CONTACT ── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.contact-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+}
+.contact-headline em { font-style: italic; color: var(--accent2); }
+.contact-body {
+  font-size: 1rem;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.7;
+  margin-bottom: 32px;
+  max-width: 440px;
+}
+.contact-body strong { color: var(--ink); font-weight: 500; }
+.contact-links { display: flex; flex-direction: column; gap: 12px; }
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 0.9rem;
+  transition: color 0.2s;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.contact-link:hover { color: var(--accent2); }
+.contact-link-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  min-width: 60px;
+}
+.focus-areas { display: flex; flex-direction: column; gap: 0; }
+.focus-item {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.focus-item:last-child { border-bottom: none; }
+.focus-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--accent2);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.focus-item h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 3px; }
+.focus-item p { font-size: 0.82rem; color: var(--muted); font-weight: 300; line-height: 1.5; }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 28px 48px;
+  border-top: 1px solid var(--rule);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-tag, .hero h1, .hero-sub, .hero-cta {
+  animation: fadeUp 0.7s ease both;
+}
+.hero-tag { animation-delay: 0.1s; }
+.hero h1 { animation-delay: 0.25s; }
+.hero-sub { animation-delay: 0.4s; }
+.hero-cta { animation-delay: 0.55s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  section { padding: 64px 24px; }
+  .hero { padding: 100px 24px 56px; }
+  .about-grid, .contact-grid, .exp-item { grid-template-columns: 1fr; gap: 32px; }
+  .hero-bg-text { display: none; }
+  .stats-strip { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Parinika Joshi</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#presentations">Presentations</a></li>
+    <li><a href="#certifications">Credentials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="max-width:100%;padding-top:140px;">
+  <div class="hero-bg-text">RWE</div>
+  <div class="hero-tag">MPH · Texas A&M · GPA 4.0</div>
+  <h1>Clinical Data<br>Scientist &amp; <em>Health<br>Tech Builder.</em></h1>
+  <p class="hero-sub">
+    Clinician-turned-data scientist with 4+ years across the full health data lifecycle — from IRB design to peer-reviewed publication. Specializing in <strong>real-world evidence, clinical ontologies, OMOP CDM pipelines, and LLM-powered health intelligence</strong>. MPH in Epidemiology &amp; Biostatistics, Texas A&amp;M (GPA 4.0).
+  </p>
+  <div class="hero-cta">
+    <a href="mailto:parinika120201@tamu.edu" class="btn-primary">Get in Touch</a>
+    <a href="#research" class="btn-outline">View Research</a>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stat-item">
+    <div class="stat-num">133K</div>
+    <div class="stat-unit">Clinical records mapped to OMOP CDM</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">4.0</div>
+    <div class="stat-unit">GPA · Epidemiology &amp; Biostatistics</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">12</div>
+    <div class="stat-unit">Peer-reviewed publications</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">5+</div>
+    <div class="stat-unit">Conference presentations</div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>SAS</span><span class="dot">·</span><span>Python</span><span class="dot">·</span><span>R</span><span class="dot">·</span><span>OMOP CDM</span><span class="dot">·</span><span>Causal Inference</span><span class="dot">·</span><span>NHANES ETL</span><span class="dot">·</span><span>Cox PH</span><span class="dot">·</span><span>REDCap</span><span class="dot">·</span><span>HIPAA</span><span class="dot">·</span><span>ICD-10</span><span class="dot">·</span><span>SNOMED-CT</span><span class="dot">·</span><span>RxNorm</span><span class="dot">·</span><span>LOINC</span><span class="dot">·</span><span>HL7 FHIR</span><span class="dot">·</span><span>Power BI</span><span class="dot">·</span><span>ArcGIS</span><span class="dot">·</span><span>Random Forest</span><span class="dot">·</span><span>GCP Certified</span><span class="dot">·</span>
+    <span>SAS</span><span class="dot">·</span><span>Python</span><span class="dot">·</span><span>R</span><span class="dot">·</span><span>OMOP CDM</span><span class="dot">·</span><span>Causal Inference</span><span class="dot">·</span><span>NHANES ETL</span><span class="dot">·</span><span>Cox PH</span><span class="dot">·</span><span>REDCap</span><span class="dot">·</span><span>HIPAA</span><span class="dot">·</span><span>ICD-10</span><span class="dot">·</span><span>SNOMED-CT</span><span class="dot">·</span><span>RxNorm</span><span class="dot">·</span><span>LOINC</span><span class="dot">·</span><span>HL7 FHIR</span><span class="dot">·</span><span>Power BI</span><span class="dot">·</span><span>ArcGIS</span><span class="dot">·</span><span>Random Forest</span><span class="dot">·</span><span>GCP Certified</span><span class="dot">·</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" style="border-bottom:1px solid var(--rule);">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About <em>Me.</em></h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm <strong>Parinika Joshi</strong>, a licensed dental surgeon turned clinical data scientist — and that's not a detour, it's my edge. My clinical background means I don't just model data; I understand what it represents at the bedside and how a clinician actually uses evidence to make decisions.</p>
+      <p>I hold an MPH in Epidemiology &amp; Biostatistics from <strong>Texas A&amp;M School of Public Health</strong> (GPA 4.0). I specialize in large-scale observational data, real-world evidence generation, clinical ontology mapping, and causal inference. I've built ETL pipelines for 100,000+ record longitudinal studies, mapped clinical datasets to the <strong>OMOP Common Data Model</strong>, and published on tobacco cessation, diabetes disparities, and arsenic-related cardiometabolic outcomes.</p>
+      <p>I work at the intersection of <strong>clinical knowledge, health data infrastructure, and generative AI</strong> — converting complex clinical questions into structured, evidence-backed insights. I use LLMs daily as force multipliers: for clinical phenotyping, ontology mapping, pipeline development, and content generation. My goal is to help close the evidence gap between data and the decisions that improve patient lives.</p>
+    </div>
+    <div class="about-sidebar">
+      <div class="sidebar-block">
+        <h4>Education</h4>
+        <div class="edu-item">
+          <div class="degree">MPH, Epidemiology &amp; Biostatistics</div>
+          <div class="school">Texas A&amp;M University · School of Public Health</div>
+          <div class="year">Aug 2024 – May 2026</div>
+        </div>
+        <div class="edu-item">
+          <div class="degree">BDS, Dental Surgery</div>
+          <div class="school">Govt. Dental College, Ahmedabad · GPA 3.84</div>
+          <div class="year">Aug 2018 – Aug 2022</div>
+        </div>
+      </div>
+      <div class="sidebar-block">
+        <h4>Awards &amp; Honors</h4>
+        <div class="award-item">Dean's Excellence Award 2024–2026 · Texas A&amp;M SPH</div>
+        <div class="award-item">Gold Medallion, Public Health Scholar</div>
+        <div class="award-item">National CHW Training Center Scholarship 2025</div>
+        <div class="award-item">Good Clinical Practice (GCP) · NIH Certified 2026</div>
+      </div>
+      <div class="sidebar-block">
+        <h4>Contact</h4>
+        <div style="font-size:0.83rem;color:var(--muted);line-height:2;">
+          <div>parinika120201@tamu.edu</div>
+          <div>+1 (979) 422-8894</div>
+          <div>California</div>
+          <div><a href="https://linkedin.com/in/parinika-joshi-6436bb1a7" style="color:var(--accent3);text-decoration:none;">linkedin.com/in/parinika-joshi</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="border-bottom:1px solid var(--rule);">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Experience <em>&amp; Roles.</em></h2>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-meta">
+      <div class="date">Feb 2025 – Present</div>
+      <div class="org">Texas A&M University<br>School of Public Health</div>
+      <div class="dept">Supervisor: Dr. Taehyun Roh</div>
+    </div>
+    <div class="exp-content">
+      <h3>Graduate Research Assistant — Epidemiology &amp; Biostatistics</h3>
+      <ul>
+        <li>Architected a full data pipeline for a longitudinal environmental health study with 100,000+ unique records across multiple time points and study arms.</li>
+        <li>Mapped high-dimensional datasets (133,000 condition occurrences; 60,000 drug exposures) to the OMOP CDM using SNOMED-CT and RxNorm for cross-site interoperability.</li>
+        <li>Developed SAPs and executed multivariate regression, SEM, and causal inference models in SAS/R/Python (n=2,155; n=30,000+).</li>
+        <li>Built reproducible NHANES ETL workflows (2013–2020) with Taylor Series Linearization; engineered SAS Macros reducing manual processing by 40%.</li>
+        <li>Generated TLFs via SAS ODS; mapped variables to SDTM domains (DM, SC, QS) for cross-study interoperability.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">SAS / R / Python</span><span class="tag">OMOP CDM</span><span class="tag">NHANES</span><span class="tag">SDTM</span><span class="tag">Causal Inference</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-meta">
+      <div class="date">May – Aug 2025</div>
+      <div class="org">Texas A&M University<br>POEMCF, School of Nursing</div>
+      <div class="dept">Supervisor: Dr. Robin Page</div>
+    </div>
+    <div class="exp-content">
+      <h3>Public Health Intern — Clinical Informatics, Maternal &amp; Child Health</h3>
+      <ul>
+        <li>Designed and deployed a longitudinal REDCap database for maternal health with complex branching logic and HIPAA-compliant validation, reducing documentation errors by 15%.</li>
+        <li>Programmed SAS Macros to automate PPD scale scoring; created ADaM-like analysis-ready datasets from raw REDCap exports.</li>
+        <li>Developed a 50-point automated patient acuity scale as a Clinical Decision Support tool to stratify high-risk maternal patients and optimize resource utilization.</li>
+        <li>Generated monthly Power BI dashboards tracking KPIs for federal grant reporting; co-authored manuscript on prenatal genetic testing.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">REDCap</span><span class="tag">SAS Macros</span><span class="tag">Power BI</span><span class="tag">ADaM</span><span class="tag">CDS Tool</span><span class="tag">HIPAA</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-meta">
+      <div class="date">Feb – Aug 2025</div>
+      <div class="org">Texas A&M University<br>School of Public Health</div>
+      <div class="dept">Supervisor: Dr. Marcia Ory</div>
+    </div>
+    <div class="exp-content">
+      <h3>Program Coordinator — Opioid Prevention Task Force</h3>
+      <ul>
+        <li>Managed IRB submissions and renewals; ensured HIPAA compliance for high-risk opioid intervention studies.</li>
+        <li>Analyzed longitudinal opioid-use datasets to identify high-risk geographic clusters and evaluate program ROI using spatial regression.</li>
+        <li>Coordinated 500+ naloxone kit distribution across 10+ community sites; built automated tracking systems ensuring 100% inventory accuracy.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">IRB</span><span class="tag">Spatial Analysis</span><span class="tag">HIPAA</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-meta">
+      <div class="date">Aug 2024 – Feb 2025</div>
+      <div class="org">Texas A&M University<br>School of Public Health</div>
+      <div class="dept">Supervisor: Dr. Tyler Prochnow</div>
+    </div>
+    <div class="exp-content">
+      <h3>Research Assistant — Health Behavior</h3>
+      <ul>
+        <li>Managed data operations for a wearable-sensor study (n=2,155); developed Python scripts to process second-level physiological signals (PPG, accelerometry).</li>
+        <li>Applied causal inference and regression to retrospective cohort data (8,000+ records); conducted Getis-Ord Gi* geospatial hotspot analysis on polysubstance use data.</li>
+        <li>Screened 2,200+ articles in Covidence for systematic reviews; contributed to NIH-funded manuscripts and APHA abstracts.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Python</span><span class="tag">Geospatial</span><span class="tag">ArcGIS</span><span class="tag">SAS</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-meta">
+      <div class="date">Dec 2023 – May 2024</div>
+      <div class="org">Institute of Public Health<br>Bengaluru, India</div>
+      <div class="dept">Clinical Research Fellow</div>
+    </div>
+    <div class="exp-content">
+      <h3>Clinical Research Fellow — Public Policy &amp; Chronic Conditions</h3>
+      <ul>
+        <li>Applied NLP (Python) to parse 50+ unstructured BRSR sustainability reports into structured datasets mimicking SDTM variable mapping across demographic cohorts.</li>
+        <li>Translated findings into actionable policy recommendations for clinical leadership; managed data lifecycle from collection through policy recommendation.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">NLP</span><span class="tag">Python</span><span class="tag">Policy Analysis</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-meta">
+      <div class="date">Oct 2022 – Oct 2023</div>
+      <div class="org">Govt. Dental College &amp; Hospital<br>Ahmedabad, India</div>
+      <div class="dept">Research Associate &amp; Intern</div>
+    </div>
+    <div class="exp-content">
+      <h3>Research Associate &amp; Intern Dentist</h3>
+      <ul>
+        <li>Served as PI for a large-scale clinical survey (n=500+); designed the research database and performed all statistical analyses in Stata.</li>
+        <li>Managed a 5-year longitudinal tobacco cessation study (n=500): Kaplan-Meier survival analysis, SDTM-precursor variable naming, and published findings.</li>
+        <li>Managed EHR documentation using ICD-10 coding for clinical trials; trained lab personnel on clinical protocol execution.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Stata</span><span class="tag">Kaplan-Meier</span><span class="tag">ICD-10</span><span class="tag">EHR</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH / PUBLICATIONS -->
+<section id="research" style="border-bottom:1px solid var(--rule);">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Publications &amp; <em>Research.</em></h2>
+  </div>
+  <div class="pub-list">
+
+    <div class="pub-item">
+      <div class="pub-year">2025</div>
+      <div class="pub-content">
+        <div class="pub-title">Mapping the Social Context of Type 2 Diabetes Management: Network Analysis Among Black/African American Men</div>
+        <div class="pub-authors">Prochnow T, <strong>Joshi PT</strong>, et al.</div>
+        <div class="pub-journal">Journal of Racial and Ethnic Health Disparities <span class="pub-status published">Published</span> <a href="https://doi.org/10.1007/s40615-025-02644-x" class="pub-link" target="_blank">DOI ↗</a></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2024</div>
+      <div class="pub-content">
+        <div class="pub-title">Relevance of Current Age in Tobacco Cessation Among Children 10–14 Years</div>
+        <div class="pub-authors"><strong>Joshi PT</strong>, Pandya S, et al.</div>
+        <div class="pub-journal">Acta Scientific Dental Sciences 8(4):40–42 <span class="pub-status published">Published</span> <a href="https://doi.org/10.31080/ASDS.2024.08.1808" class="pub-link" target="_blank">DOI ↗</a></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2024</div>
+      <div class="pub-content">
+        <div class="pub-title">Antibacterial Effect of Two Novel Sealants: A Laboratory-Based Study</div>
+        <div class="pub-authors">Deshpande DD, Maniar D, Bhargava A, <strong>Joshi PT</strong>, et al.</div>
+        <div class="pub-journal">Journal of Pharmacy and Bioallied Sciences <span class="pub-status published">Published</span> <a href="https://doi.org/10.4103/jpbs.jpbs_459_23" class="pub-link" target="_blank">DOI ↗</a></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2023</div>
+      <div class="pub-content">
+        <div class="pub-title">Musculoskeletal Disorders among Dental Practitioners</div>
+        <div class="pub-authors">Maniar D, <strong>Joshi PT</strong>, Tank B, et al.</div>
+        <div class="pub-journal">International Journal of Medical and Oral Research 8(2):48–51 <span class="pub-status published">Published</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2023</div>
+      <div class="pub-content">
+        <div class="pub-title">Knowledge, Attitude, and Practice toward Infection Control Among Dental Students</div>
+        <div class="pub-authors"><strong>Joshi PT</strong>, Tank B, Maniar D, et al.</div>
+        <div class="pub-journal">International Journal of Medical and Oral Research 8(2):55–59 <span class="pub-status published">Published</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2026</div>
+      <div class="pub-content">
+        <div class="pub-title">Arsenic and the Risk of Hepatocellular Carcinoma: A Multimodal Study</div>
+        <div class="pub-authors">Roy H, Roh T, Kumar R, De La Cruz M, Luster M, Kobs Z, Alsarraj A, Sorial E, Hasan T, Khaderi S, Duong H, <strong>Joshi PT</strong>, et al.</div>
+        <div class="pub-journal">Hepatology · Manuscript ID: HEP-26-0899 <span class="pub-status submitted">Submitted</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2026</div>
+      <div class="pub-content">
+        <div class="pub-title">Association Between Drinking Water Arsenic Exposure and Suicide Rates in Texas</div>
+        <div class="pub-authors">Datzman J, Han D, Bolanos C, Roh T, <strong>Joshi P</strong>.</div>
+        <div class="pub-journal"><span class="pub-status submitted">Submitted</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2026</div>
+      <div class="pub-content">
+        <div class="pub-title">Association of Soil Arsenic Levels with Suicide Risk in the United States: A Spatial Regression Analysis</div>
+        <div class="pub-authors">Datzman J, Han D, Xu X, Bolanos C, <strong>Joshi PT</strong>, et al.</div>
+        <div class="pub-journal">Environmental Pollution <span class="pub-status review">Under Review</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2026</div>
+      <div class="pub-content">
+        <div class="pub-title">Drinking to Cope with Discrimination, Depression, and Help-Seeking Among College Students</div>
+        <div class="pub-authors"><strong>Joshi PT</strong>, Montemayor B, Salwa A.</div>
+        <div class="pub-journal">Journal for College Student Mental Health <span class="pub-status review">Under Review</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2026</div>
+      <div class="pub-content">
+        <div class="pub-title">Ecological Momentary Assessment of Social Context and Physical Activity: A Systematic Review</div>
+        <div class="pub-authors">Prochnow T, Zhou Y, <strong>Joshi P</strong>, et al.</div>
+        <div class="pub-journal">Annals of Behavioral Medicine <span class="pub-status review">Under Review</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2026</div>
+      <div class="pub-content">
+        <div class="pub-title">Health Education Program Participation and Diabetes-Related Outcomes Among Black/African American Men</div>
+        <div class="pub-authors">Prochnow T, <strong>Joshi P</strong>, Senthil R, Zhou Y, et al.</div>
+        <div class="pub-journal">Science of Diabetes Self-Management and Care <span class="pub-status review">Under Review</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2026</div>
+      <div class="pub-content">
+        <div class="pub-title">Social Vulnerability and Firearm Violence: A Spatiotemporal Analysis of Homicide, Assault, and Suicide Across the U.S. Gulf Coast, 2014–2023</div>
+        <div class="pub-authors"><strong>Joshi P</strong>, Rochford H, Joseph J, &amp; Han D.</div>
+        <div class="pub-journal">Department of Epidemiology &amp; Biostatistics; Department of Health Policy <span class="pub-status prep">In Prep</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="border-bottom:1px solid var(--rule);">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Skills &amp; <em>Toolkit.</em></h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-block">
+      <h4>Statistical Computing</h4>
+      <div class="skill-pills">
+        <span class="skill-pill">SAS (Base, Macro, ODS)</span>
+        <span class="skill-pill">R (Tidyverse, Survival, ggplot2)</span>
+        <span class="skill-pill">Python (Pandas, NumPy, Scikit-learn)</span>
+        <span class="skill-pill">SPSS</span>
+        <span class="skill-pill">STATA</span>
+        <span class="skill-pill">MATLAB</span>
+        <span class="skill-pill">SQL</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h4>Data Models &amp; Standards</h4>
+      <div class="skill-pills">
+        <span class="skill-pill">OMOP CDM</span>
+        <span class="skill-pill">CDISC / SDTM</span>
+        <span class="skill-pill">HL7 FHIR</span>
+        <span class="skill-pill">ADaM</span>
+        <span class="skill-pill">ETL Pipelines</span>
+        <span class="skill-pill">OHDSI (ATLAS)</span>
+        <span class="skill-pill">PEDSnet</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h4>Clinical Vocabularies</h4>
+      <div class="skill-pills">
+        <span class="skill-pill">ICD-10</span>
+        <span class="skill-pill">SNOMED-CT</span>
+        <span class="skill-pill">RxNorm / NDC</span>
+        <span class="skill-pill">LOINC</span>
+        <span class="skill-pill">CPT</span>
+        <span class="skill-pill">MedDRA</span>
+        <span class="skill-pill">CMS-HCC</span>
+        <span class="skill-pill">HEDIS</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h4>Methods</h4>
+      <div class="skill-pills">
+        <span class="skill-pill">Causal Inference</span>
+        <span class="skill-pill">Propensity Score Matching</span>
+        <span class="skill-pill">Cox PH / Kaplan-Meier</span>
+        <span class="skill-pill">Random Forest / Lasso</span>
+        <span class="skill-pill">SEM</span>
+        <span class="skill-pill">Survey Regression</span>
+        <span class="skill-pill">Getis-Ord Gi*</span>
+        <span class="skill-pill">NLP</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h4>Data &amp; Visualization</h4>
+      <div class="skill-pills">
+        <span class="skill-pill">REDCap</span>
+        <span class="skill-pill">Power BI</span>
+        <span class="skill-pill">Tableau</span>
+        <span class="skill-pill">ArcGIS</span>
+        <span class="skill-pill">R-Shiny</span>
+        <span class="skill-pill">EPIC / EMR</span>
+        <span class="skill-pill">Google Cloud</span>
+        <span class="skill-pill">Qualtrics</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h4>Regulatory &amp; Compliance</h4>
+      <div class="skill-pills">
+        <span class="skill-pill">IRB (Submissions &amp; Renewals)</span>
+        <span class="skill-pill">HIPAA</span>
+        <span class="skill-pill">GCP (NIH Certified)</span>
+        <span class="skill-pill">DSMC Reporting</span>
+        <span class="skill-pill">Audit Readiness</span>
+        <span class="skill-pill">Informed Consent</span>
+        <span class="skill-pill">SAP Development</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="border-bottom:1px solid var(--rule);">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Selected <em>Projects.</em></h2>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-domain">Sleep Physiology · Python</div>
+      <h3>Full-Night ECG HRV Pipeline for Sleep Apnea Mortality Prediction</h3>
+      <p>Built a full-night ECG processing pipeline extracting 16 HRV metrics from 50 overnight polysomnography recordings (SHHS-1). Cox PH model achieved C-index = 0.835; automated sleep staging via YASA LightGBM reached Cohen's κ = 0.814.</p>
+      <div class="tags">
+        <span class="tag">Python</span><span class="tag">MNE</span><span class="tag">NeuroKit2</span><span class="tag">Cox PH</span><span class="tag">LightGBM</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-domain">NHANES · SAS / Python</div>
+      <h3>Multi-Cycle NHANES ETL Data Pipeline Architecture</h3>
+      <p>Engineered an automated, reproducible ETL pipeline harmonizing NHANES 2013–2020 — merging dietary, environmental, and biochemical modules with complex survey weighting and Taylor Series Linearization for variance estimation.</p>
+      <div class="tags">
+        <span class="tag">SAS</span><span class="tag">Python</span><span class="tag">Survey Design</span><span class="tag">ETL</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-domain">Causal Inference · R</div>
+      <h3>Folate-Arsenic Effect Modification on Depression &amp; Cognition</h3>
+      <p>Investigated whether RBC folate modifies the causal effect of low-level arsenic on depression (PHQ-9) and cognition (n=3,004). Constructed a formal causal DAG, applied parametric G-formula, and conducted 7 sensitivity analyses including E-value and quantitative bias analysis.</p>
+      <div class="tags">
+        <span class="tag">R</span><span class="tag">G-formula</span><span class="tag">DAG</span><span class="tag">NHANES</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-domain">Geospatial · ArcGIS / R</div>
+      <h3>Spatial Analysis of Health Disparities — Asthma, SVI &amp; Firearm Violence</h3>
+      <p>Integrated CDC SVI, EPA TRI, Census, and surveillance data to examine county-level asthma prevalence and social vulnerability in Texas. Conducted Getis-Ord Gi* hotspot analysis; mapped population-adjusted rates of homicides and fatal/non-fatal suicide attempts.</p>
+      <div class="tags">
+        <span class="tag">ArcGIS</span><span class="tag">R</span><span class="tag">Getis-Ord Gi*</span><span class="tag">Spatial Regression</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-domain">Risk Adjustment · SAS / R / Python</div>
+      <h3>Predictive Modeling &amp; CMS-HCC Risk Adjustment Framework</h3>
+      <p>Selected and tuned ML algorithms (Random Forest, Lasso) to predict clinical outcomes; cross-validation improved patient acuity prediction by 15% over parametric models. Developed Cox PH models aligned with CMS-HCC risk stratification frameworks.</p>
+      <div class="tags">
+        <span class="tag">Random Forest</span><span class="tag">Lasso</span><span class="tag">CMS-HCC</span><span class="tag">Cox PH</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-domain">HIV · R</div>
+      <h3>Healthcare Access &amp; HIV Clinical Outcomes — NHANES 2017–2018</h3>
+      <p>Merged five NHANES modules to examine the association between insurance status and lymphocyte count (CD4 proxy) among HIV-positive adults. Applied unadjusted and covariate-adjusted linear regression with Fisher's exact tests and multicollinearity diagnostics.</p>
+      <div class="tags">
+        <span class="tag">R</span><span class="tag">NHANES</span><span class="tag">Linear Regression</span><span class="tag">Health Equity</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-domain">Cardiovascular · SAS</div>
+      <h3>Cardiovascular Risk &amp; Cotinine Dose-Response Modeling</h3>
+      <p>Multiple linear regression examining dose-response between serum cotinine (tobacco biomarker) and blood pressure outcomes, adjusting for age, gender, and BMI in a nationally representative sample.</p>
+      <div class="tags">
+        <span class="tag">SAS</span><span class="tag">Linear Regression</span><span class="tag">Cardiovascular</span><span class="tag">NHANES</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-domain">Pharmacoepidemiology · SAS</div>
+      <h3>Schizophrenia RCT — Poisson Regression &amp; Post-Market Surveillance</h3>
+      <p>Calculated Incidence Rate Ratios (IRR) via Poisson regression to assess treatment effects in a schizophrenia RCT; tested non-proportional hazards for post-market surveillance analytics aligned with regulatory reporting standards.</p>
+      <div class="tags">
+        <span class="tag">SAS</span><span class="tag">Poisson Regression</span><span class="tag">IRR</span><span class="tag">RCT Analytics</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-domain">Pediatric Health · Survey Methods</div>
+      <h3>Pediatric Eating Behaviors — FNPA Screening Tool Validation</h3>
+      <p>Contributed to validation of the FNPA (Frequency of Nurse Practitioner Activities) screening tool for childhood obesity prevention. Drafted IRB protocol, managed data entry, and ensured QA across the data lifecycle.</p>
+      <div class="tags">
+        <span class="tag">Survey Validation</span><span class="tag">IRB</span><span class="tag">QA/QC</span><span class="tag">Pediatrics</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRESENTATIONS -->
+<section id="presentations" style="border-bottom:1px solid var(--rule);">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <h2 class="section-title">Conference <em>Presentations.</em></h2>
+  </div>
+
+  <div style="margin-bottom:40px;">
+    <div style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent2);margin-bottom:18px;display:flex;align-items:center;gap:10px;">
+      <span style="display:inline-block;width:24px;height:1px;background:var(--accent2);"></span>Podium Presentation
+    </div>
+    <div class="pub-item">
+      <div class="pub-year">2025</div>
+      <div class="pub-content">
+        <div class="pub-title">Drinking to Cope with Discrimination: A Barrier to Help-Seeking Among College Students</div>
+        <div class="pub-authors"><strong>Joshi PT</strong>, Montemayor B, Salwa A.</div>
+        <div class="pub-journal">American Public Health Association (APHA) Annual Meeting &amp; Expo, Washington, D.C. <span class="pub-status published">Podium</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:18px;display:flex;align-items:center;gap:10px;">
+      <span style="display:inline-block;width:24px;height:1px;background:var(--rule);"></span>Poster Presentations
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2026</div>
+      <div class="pub-content">
+        <div class="pub-title">Association Between Arsenic Exposure in Drinking Water and Hepatocellular Carcinoma Incidence in Texas</div>
+        <div class="pub-journal">National Public Health Week — Jean Brender Research Poster Contest, Texas A&amp;M SPH <span class="pub-status submitted">Poster</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2026</div>
+      <div class="pub-content">
+        <div class="pub-title">Mapping the Dual Burden: Geographic Heterogeneity in Alcohol and Cannabis Use Disorder Risk Among College Students</div>
+        <div class="pub-journal">National Public Health Week — Jean Brender Research Poster Contest, Texas A&amp;M SPH <span class="pub-status submitted">Poster</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2026</div>
+      <div class="pub-content">
+        <div class="pub-title">Mapping Environmental Health in Texas: Geospatial &amp; Statistical Analysis of Pollution, Social Vulnerability, and the 'Green Buffer' Effect on Asthma</div>
+        <div class="pub-journal">National Public Health Week — Jean Brender Research Poster Contest, Texas A&amp;M SPH <span class="pub-status submitted">Poster</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2025</div>
+      <div class="pub-content">
+        <div class="pub-title">Drinking to Cope with Discrimination: A Barrier to Help-Seeking Among College Students</div>
+        <div class="pub-journal">Student Research Week Research Competition, Texas A&amp;M University <span class="pub-status review">Poster</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2025</div>
+      <div class="pub-content">
+        <div class="pub-title">Mapping the Social Context of Type 2 Diabetes Management: Network Analysis Among Black/African American Men</div>
+        <div class="pub-journal">National Public Health Week — Jean Brender Research Poster Contest, Texas A&amp;M SPH <span class="pub-status review">Poster</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS & LEADERSHIP -->
+<section id="certifications" style="border-bottom:1px solid var(--rule);">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <h2 class="section-title">Credentials &amp; <em>Leadership.</em></h2>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;">
+
+    <div>
+      <div style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--rule);">Certifications &amp; Training</div>
+      <div style="display:flex;flex-direction:column;gap:0;">
+
+        <div style="display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--rule);font-size:0.85rem;">
+          <span style="font-weight:500;">Good Clinical Practice (GCP)</span>
+          <span style="font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--accent2);">NIH · Feb 2026</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--rule);font-size:0.85rem;">
+          <span style="font-weight:500;">Responsible Conduct of Research</span>
+          <span style="font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--accent2);">Texas A&amp;M · 2026</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--rule);font-size:0.85rem;">
+          <span style="font-weight:500;">CITI Group 1 — Biomedical Research Investigators</span>
+          <span style="font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--accent2);">May 2024</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--rule);font-size:0.85rem;">
+          <span style="font-weight:500;">CITI Group 2 — Social &amp; Behavioral Research</span>
+          <span style="font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--accent2);">Aug 2024</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--rule);font-size:0.85rem;">
+          <span style="font-weight:500;">CITI Public Health Research</span>
+          <span style="font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--accent2);">May 2024</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--rule);font-size:0.85rem;">
+          <span style="font-weight:500;">Opioid Education &amp; Naloxone Administration (OENA)</span>
+          <span style="font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--accent2);">Aug 2024</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;font-size:0.85rem;">
+          <span style="font-weight:500;">Johns Hopkins Advanced Biostatistics <span style="font-weight:400;color:var(--muted);">(16 Certifications)</span></span>
+          <span style="font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--accent2);">Oct 2022 – May 2023</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--rule);">Leadership &amp; Service</div>
+      <div style="display:flex;flex-direction:column;gap:0;">
+        <div style="padding:12px 0;border-bottom:1px solid var(--rule);display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--accent2);font-family:'DM Mono',monospace;font-size:0.65rem;flex-shrink:0;margin-top:3px;">✦</span>
+          <div>
+            <div style="font-size:0.88rem;font-weight:600;">Public Health Representative</div>
+            <div style="font-size:0.8rem;color:var(--muted);">Texas A&amp;M Health Student Advisory Council</div>
+          </div>
+        </div>
+        <div style="padding:12px 0;border-bottom:1px solid var(--rule);display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--accent2);font-family:'DM Mono',monospace;font-size:0.65rem;flex-shrink:0;margin-top:3px;">✦</span>
+          <div>
+            <div style="font-size:0.88rem;font-weight:600;">Council Mentor-Officer</div>
+            <div style="font-size:0.8rem;color:var(--muted);">Epidemiology Student Organization, Texas A&amp;M SPH</div>
+          </div>
+        </div>
+        <div style="padding:12px 0;border-bottom:1px solid var(--rule);display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--accent2);font-family:'DM Mono',monospace;font-size:0.65rem;flex-shrink:0;margin-top:3px;">✦</span>
+          <div>
+            <div style="font-size:0.88rem;font-weight:600;">Subcommittee Member, Clinical Case Development</div>
+            <div style="font-size:0.8rem;color:var(--muted);">Disaster Day 2025 — largest student-led disaster simulation in the U.S.</div>
+          </div>
+        </div>
+        <div style="padding:12px 0;border-bottom:1px solid var(--rule);display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--accent2);font-family:'DM Mono',monospace;font-size:0.65rem;flex-shrink:0;margin-top:3px;">✦</span>
+          <div>
+            <div style="font-size:0.88rem;font-weight:600;">STEM+C Mentor</div>
+            <div style="font-size:0.8rem;color:var(--muted);">Texas A&amp;M Institute of Technology Infused Learning · Jan–Feb 2025 · Taught computing and data analysis skills to students from underrepresented communities</div>
+          </div>
+        </div>
+        <div style="padding:12px 0;display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--accent2);font-family:'DM Mono',monospace;font-size:0.65rem;flex-shrink:0;margin-top:3px;">✦</span>
+          <div>
+            <div style="font-size:0.88rem;font-weight:600;">National CHW Training Center Scholar</div>
+            <div style="font-size:0.8rem;color:var(--muted);">Competitive national scholarship · March 2025</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-num">08</span>
+    <h2 class="section-title">Let's <em>Connect.</em></h2>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <div class="contact-headline">Building the future of <em>clinical intelligence.</em></div>
+      <p class="contact-body">
+        I'm interested in roles at the intersection of <strong>real-world evidence, clinical data infrastructure, and generative AI</strong> — particularly in health tech companies working to close the gap between data and clinical decisions. If you're building in this space, I'd love to connect.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:parinika120201@tamu.edu" class="contact-link">
+          <span class="contact-link-label">Email</span>
+          parinika120201@tamu.edu
+        </a>
+        <a href="https://linkedin.com/in/parinika-joshi-6436bb1a7" class="contact-link" target="_blank">
+          <span class="contact-link-label">LinkedIn</span>
+          linkedin.com/in/parinika-joshi
+        </a>
+        <a href="tel:+19794228894" class="contact-link">
+          <span class="contact-link-label">Phone</span>
+          +1 (979) 422-8894
+        </a>
+        <div class="contact-link" style="cursor:default;">
+          <span class="contact-link-label">Location</span>
+          California
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--rule);">Focus Areas</div>
+      <div class="focus-areas">
+        <div class="focus-item">
+          <span class="focus-num">01</span>
+          <div>
+            <h4>Real-World Evidence &amp; Clinical Intelligence</h4>
+            <p>OMOP CDM pipelines, clinical phenotyping, RWE generation, evidence synthesis for health systems and life sciences</p>
+          </div>
+        </div>
+        <div class="focus-item">
+          <span class="focus-num">02</span>
+          <div>
+            <h4>Generative AI for Clinical Content</h4>
+            <p>LLM-powered clinical Q&amp;A, ontology-structured content pipelines, AI-assisted evidence generation and QA/QC</p>
+          </div>
+        </div>
+        <div class="focus-item">
+          <span class="focus-num">03</span>
+          <div>
+            <h4>Clinical Data Infrastructure</h4>
+            <p>ETL pipeline architecture, healthcare data standards (ICD-10, SNOMED-CT, RxNorm, LOINC), HIPAA-compliant systems design</p>
+          </div>
+        </div>
+        <div class="focus-item">
+          <span class="focus-num">04</span>
+          <div>
+            <h4>Epidemiology &amp; Biostatistics</h4>
+            <p>Causal inference, survival analysis, geospatial health disparities, complex survey design</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Parinika Joshi · MPH, Epidemiology &amp; Biostatistics · California
+</footer>
+
+</body>
+</html>
